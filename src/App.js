@@ -1,9 +1,9 @@
 import './App.css';
-
+import Comment from './Components/Comment';
 function App() {
   return (
     <div className="App">
-      test
+      <Comment/>
     </div>
   );
 }
