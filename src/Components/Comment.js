@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import "./Comment.css";
 
 
-function Comment(props){
+function Comment(){
 
     let DATA = []
     const [data, setData] = useState(DATA)
