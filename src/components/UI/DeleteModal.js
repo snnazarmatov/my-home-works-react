@@ -10,7 +10,7 @@ const DeleteModal = props => {
         <div className={classes.backdrop} onClick={props.onConfirm}>
             <Card className={classes.modal}>
                 <header className={classes.header}>
-                    <p className={classes.text}>Are you sure?</p>
+                    <p className={classes.text}>удалить эткени макулсузбу анда confirm?<br/>же болбосом жок отмена cancel</p>
                         <footer className={classes.actions}>
                            <Button onClick={props.onDelete}>Confirm</Button>
                            <Button onClick={props.onCancel}>Cancel</Button>
