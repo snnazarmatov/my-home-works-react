@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import Button from "../UI/Button";
 import DeleteModal from "../UI/DeleteModal";
-import classes from '../UI/DeleteModal.module.css';
 
 
 function RenderList(props){
@@ -15,7 +14,7 @@ function RenderList(props){
         props.onDelete(props.id)
     }
    return (
-          <li className={classes.list}>
+          <li>
            {props.children}
            <Button onClick={deleteHandler}>Delete</Button>
            {active ? <DeleteModal onDelete={onDelete} onCancel={() =>  setActive(false)}/> : ''}
