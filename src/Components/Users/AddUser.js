@@ -6,30 +6,30 @@ import ErrorModal from '../Modals/ErrorModal/ErrorModal';
 
 
 const AddUser = props => {
-    const [enteredUsername, setEnteredUsername] = useState('');
-    const [enteredAge, setEnteredAge] = useState('');
-    const [error, setError] = useState();
+    const [enteredUsername, setEnteredUsername] = useState(''); // username:******
+    const [enteredAge, setEnteredAge] = useState(''); // age: ******
+    const [error, setError] = useState(); // Ошибкалар учун
 
 
-    const usernameChangeHandler = (event) => {
+    const usernameChangeHandler = (event) => { // inventin znacheniyasi
         setEnteredUsername(event.target.value);
     }
 
-    const ageChangeHandler = (event) => {
+    const ageChangeHandler = (event) => {// agetin znacheniyasi
         setEnteredAge(event.target.value);
     }
 
-    const addUserHandler = (event) => {
-        event.preventDefault();
+    const addUserHandler = (event) => { // button
+        event.preventDefault(); // toktotuu
         if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
             setError({
                 title: 'Invalid input',
-                message: 'Please enter a valid age(> 0)'
+                message: 'Please enter a valid age(> 0) or username'
             })
             return;
         }
 
-        if(+enteredAge < 2) {
+        if(enteredAge < 2) {
             setError({
                 title: 'Invalid age',
                 message: 'Please enter a valid age(> 0 )'
@@ -42,7 +42,6 @@ const AddUser = props => {
         setEnteredUsername('');
 
     }
-
     const errorHandler = () => {
         setError(null);
     };

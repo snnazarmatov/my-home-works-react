@@ -27,10 +27,10 @@ function App() {
       })
   }
 
-  // удалить user
+  // удалить user  .2000000
    const onDelete = (goalId) => {
     setUserList( (prevUsers) => {
-      const updatedUsers = prevUsers.filter(user => user.id !== goalId)
+      const updatedUsers = prevUsers.filter(user => user.id !== goalId) //2000000
       return updatedUsers
     });
   }

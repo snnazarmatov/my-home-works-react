@@ -12,7 +12,7 @@ const UsersList = (props) => {
       {/* props.OnDelete 2 */}
                 {props.users.map(user => 
                 <RenderList key={user.id} onDelete={() => props.onDelete(user.id)}>
-                {user.name} ({user.age} years old)
+                {user.name} ({user.age} сен жатасын)
                 </RenderList>
                 )}
             </ul>
