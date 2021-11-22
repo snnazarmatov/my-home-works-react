@@ -1,7 +1,6 @@
-import React from 'react';
 import classes from '../DeleteModal/DeleteModal.module.css';
-import Card from '..//..//../UI/Card/Card';
-import Button from '../../UI/Button/Button';
+import Card from '..//../UI/Card';
+import Button from '..//../UI/Button/Button';
 
 const ModalOverlayDelete = (props) => {
     return (

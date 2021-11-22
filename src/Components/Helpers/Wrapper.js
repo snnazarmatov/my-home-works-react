@@ -1,11 +1,4 @@
-import React from 'react'
-
-const Wrapper = () => {
-    return (
-        <div>
-            
-        </div>
-    )
+const Wrapper = (props) => {
+    return props.children;
 }
-
 export default Wrapper

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Backdrop from '..//..//../UI/Backdrop/Backdrop';
-import ModalOverlay from '../DeleteModal/ModalOverlay'
+import Backdrop from '..//../UI/Backdrop/Backdrop';
+import ModalOverlay from './ModalOverlay';
 
 const ErrorModal = (props) => {
     return (
@@ -11,11 +11,14 @@ const ErrorModal = (props) => {
                 document.getElementById('backdrop-root')
             )}
             {ReactDOM.createPortal(
-                <ModalOverlay title={props.title}
-                message={props.messege}
-                onConfirm={props.onConfirm}/>,
+                <ModalOverlay 
+                title={props.title}
+                message={props.message}
+                onConfirm={props.onConfirm}
+                />,
                 document.getElementById('modal-root')
             )}
+            
         </React.Fragment>
     )
 }

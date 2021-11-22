@@ -1,23 +1,26 @@
 .input {
     margin: 150px auto;
     padding: 10px;
-    width: 90%;
+    width: 80%;
     max-width: 600px;
 }
+
 .input label {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .input input {
-    font: 500;
+    font: 400;
     display: block;
-    width: 100%;
+    width: 90%;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
 }
+
 .input input:focus {
-    outline:none;
-    border-color: #4f0054
+    outline: none;
+    border-color: #4f005f;
 }
