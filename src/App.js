@@ -1,9 +1,10 @@
 import './App.css';
-import Comment from './Components/Comment';
+import UseRef from './Components/UseRef';
+
 function App() {
   return (
     <div className="App">
-      <Comment/>
+      <UseRef/>
     </div>
   );
 }
