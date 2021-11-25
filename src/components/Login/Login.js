@@ -6,7 +6,7 @@ import Button from '../UI/Button/Button';
 
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState(''); // поле ввода емейл
-  const [emailIsValid, setEmailIsValid] = useState(); // проверка поля true/false емейл
+  const [emailIsValid, setEmailIsValid] = useState(''); // проверка поля true/false емейл
   const [enteredPassword, setEnteredPassword] = useState(''); // поле ввода пароль
   const [passwordIsValid, setPasswordIsValid] = useState(); // проверка поля true/false пароль
   const [formIsValid, setFormIsValid] = useState(false); // проверка полей true/false емейл & пароль
@@ -22,8 +22,6 @@ const Login = (props) => {
       event.target.value.includes('@') && enteredPassword.trim().length > 6
     );
   };
-
-
             //password
   const passwordChangeHandler = (event) => {
     // password инпутка жазылаган value алат password

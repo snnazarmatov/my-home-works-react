@@ -23,7 +23,7 @@ function App() {
   //   console.log("in effect");
   // },[]);//зависимост кошкон учурда useEffect бир жолу иштейт.
   //********************************* */
-
+ 
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
