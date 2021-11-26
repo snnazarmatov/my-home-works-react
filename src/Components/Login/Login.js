@@ -1,101 +1,151 @@
-import React, { useState } from 'react';
 
-import Card from '../UI/Card/Card';
-import classes from './Login.module.css';
-import Button from '../UI/Button/Button';
+import React, { useState, useEffect, useReducer, useContext } from "react";
+import Card from "../UI/Card/Card";
+import classes from "./Components/Login/Login.module.css";
+import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
+
+/* 
+Обратите внимание, что я создал эту функцию-редюсера. 
+вне функции компонента. И я сделал это, потому что внутри этой функции-редюсера 
+нам не нужны данные который генерируется внутри функции компонента. 
+Таким образом, эта функцию-редюсера может быть создана вне области видимости этой компонентной функции 
+потому что ему не нужно ни с чем взаимодействовать что определяется внутри функции компонента. 
+Все данные, которые потребуются и используется внутри функции-редюсера будет передано в эту функцию 
+когда он выполняется React'ом, автоматически.
+*/
+const emailReducer = (prevState, action) => {
+  if (action.type === "USER_INPUT") {
+    return {
+      value: action.val,
+      isValid: action.val.includes("@"),
+    };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return {
+      value: prevState.value,
+      isValid: prevState.value.includes("@"),
+    };
+  }
+  return {
+    value: "",
+    isValid: false,
+  };
+};
+
+const passwordReducer = (prevState, action) => {
+  if (action.type === "USER_INPUT") {
+    return {
+      value: action.val,
+      isValid: action.val.trim().length > 6,
+    };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return {
+      value: prevState.value,
+      isValid: prevState.value.trim().length > 6,
+    };
+  }
+  return {
+    value: "",
+    isValid: false,
+  };
+};
 
 const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState(''); // поле ввода емейл
-  const [emailIsValid, setEmailIsValid] = useState(''); // проверка поля true/false емейл
-  const [enteredPassword, setEnteredPassword] = useState(''); // поле ввода пароль
-  const [passwordIsValid, setPasswordIsValid] = useState(); // проверка поля true/false пароль
-  const [formIsValid, setFormIsValid] = useState(false); // проверка полей true/false емейл & пароль
+  // const [enteredEmail, setEnteredEmail] = useState('');//поля ввода емайл
+  // const [emailIsValid, setEmailIsValid] = useState(falce);//проверка поля true/false емайл
+  // const [enteredPassword, setEnteredPassword] = useState('');//поля ввода пароль
+  // const [passwordIsValid, setPasswordIsValid] = useState();//
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isValid: false,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: false,
+  });
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
 
-            //email
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('EFFECT');
+      setFormIsValid(
+        emailState.isValid && passwordState.isValid
+      );
+    }, 500);
+
+    return () => {
+      console.log('clean up');
+      clearTimeout(timer);
+    }
+
+  }, [emailIsValid, passwordIsValid]);
+
+//user //input
   const emailChangeHandler = (event) => {
-    // инпутка жазылган value алат email
-    setEnteredEmail(event.target.value);
-
-    setFormIsValid(
-      // проверка валидацию email инпутка жазылган value ну кайра алаып includes('@'ушунун ичинде эмне болсо true bolot) и password
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
+    // setEnteredEmail(event.target.value);
+    dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+    // setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
   };
-            //password
+
   const passwordChangeHandler = (event) => {
-    // password инпутка жазылаган value алат password
-    setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      // проверка валидацию password и email
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
+    // setEnteredPassword(event.target.value);
+    dispatchPassword({ type: 'USER_INPUT', val: event.target.value })
+    // setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
   };
-//*********************************** */
 
-
-        //validate?
   const validateEmailHandler = () => {
-    // @ бар болуш керек экенин текшерет, болбосо иштебейт
-    setEmailIsValid(enteredEmail.includes('@'));
-  };
+    // setEmailIsValid(emailState.isValid);
+    dispatchEmail({ type: "INPUT_BLUR" });
+  };//INPUT_BLUR работает когда тогда наш последный значения ичинде последный емайлды
 
-        //validPassword
   const validatePasswordHandler = () => {
-    // password 6дан чон болуш кк
-    setPasswordIsValid(enteredPassword.trim().length > 6);
+    // setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPassword({ type: "INPUT_BLUR" })
   };
-//enteredEmail,enteredPassword tu emailIsValid,posswordIsValid ке(проверка поля true/false емейл и парол) го сактап коюушубуя керек анкени
-//ушул жерде колдонобуз  <div
-        //   className={`${classes.control} ${
-        //     passwordIsValid === false ? classes.invalid : ''
-        //   }`}
-        // >
 
-
-//************************************ */
   const submitHandler = (event) => {
-    // buttton басканда функция иштейт
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword); // lifting-up
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
         <div
-          className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ''
-          }`}
+          className={`${classes.control} ${emailState.isValid === false ? classes.invalid : ""
+            }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
         </div>
         <div
-          className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ''
-          }`}
+          className={`${classes.control} ${passwordState.isValid === false ? classes.invalid : ""
+            }`}
         >
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={enteredPassword}
+            value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
         </div>
         <div className={classes.actions}>
-          <Button type="submit" className=
-          //disabled деген пропста обшии form ду проверка кылабыз inValid басыбайт isValid басылат
-          {classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
           </Button>
         </div>
