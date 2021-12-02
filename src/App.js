@@ -1,9 +1,11 @@
 import './App.css';
-import Comment from './Components/Comment';
+import Todos from './Components/Todos';
+
+
 function App() {
   return (
     <div className="App">
-      <Comment/>
+      <Todos/>
     </div>
   );
 }
