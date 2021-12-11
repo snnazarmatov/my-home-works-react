@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+  }
+  
+  .main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+    padding: 20px;
+    background-color: rgb(246, 248, 241);
+  }
+  
+  .card {
+    width: 350px;
+    height: 400px;
+    background-color: rgb(137, 219, 69);
+    border: 1px solid black;
+    margin: 15px;
+  }
+  
+  .title {
+    width: 200px;
+    font-weight: bold;
+  }
+  
+  .first {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    color: white;
+  }
+  
+  .id {
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  .url {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    height: 150px;
+    align-items: center;
+    width: 200px;
+    margin: 75px;
+  }
+  .text {
+    margin-right: 280px;
+  }
