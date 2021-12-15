@@ -26,7 +26,7 @@ const BasicForm = (props) => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler, 
     inputBlurHandler: emailBlurHandler
-  } = useInput(value => value.includes('@.com'))
+  } = useInput(value => value.includes('@gmail.com'))
 
   let formIsValid = false;
   if(enteredFirstNameIsValid && enteredLastNameIsValid && enteredEmailIsValid) {
@@ -52,10 +52,10 @@ const BasicForm = (props) => {
       <div className='control-group'>
         {/* 1-input */}
         <div className={firsNameInputClasses}>
-          <label htmlFor='name'>First Name</label>
+          <label htmlFor='Firsname'>First Name</label>
           <input 
           type='text' 
-          id='name' 
+          id='Firstname' 
           onChange={firsNameChangeHandler}
           onBlur={firstNameBlurHandler}
           value={enteredFirstName}
@@ -64,10 +64,10 @@ const BasicForm = (props) => {
         </div>
         {/* 2-input */}
         <div className={LastNameInputClasses}>
-          <label htmlFor='name'>Last Name</label>
+          <label htmlFor='Lastname'>Last Name</label>
           <input 
           type='text' 
-          id='name'
+          id='Lastname'
           onChange={LastNameChangeHandler}
           onBlur={LastNameBlurHandler}
           value={enteredLastName}
@@ -78,10 +78,10 @@ const BasicForm = (props) => {
 
       {/* 3-email input */}
       <div className={emailInputClasses}>
-        <label htmlFor='name'>E-Mail Address</label>
+        <label htmlFor='email'>E-Mail Address</label>
         <input 
         type='text' 
-        id='name' 
+        id='email' 
         onChange={emailChangeHandler}
         onBlur={emailBlurHandler}
         />
