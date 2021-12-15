@@ -1,13 +1,12 @@
-import './App.css';
-import Todos from './Components/Todos';
+import BasicForm from './components/BasicForm';
 
 
 //Акыркы сабактагы биз тузгон useInput аркылуу BasicForm.js компонентин инпутарын дагым обработка кылып чыккыла
 
 function App() {
   return (
-    <div className="App">
-      <Todos/>
+    <div className="app">
+      <BasicForm/>
     </div>
   );
 }
