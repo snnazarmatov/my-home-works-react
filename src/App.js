@@ -1,11 +1,10 @@
 import './App.css';
-import Todos from './Components/Todos';
 
 
 function App() {
   return (
     <div className="App">
-      <Todos/>
+      <h1>hello hw-33</h1>
     </div>
   );
 }
